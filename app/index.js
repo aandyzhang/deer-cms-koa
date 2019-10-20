@@ -15,6 +15,6 @@ mongoose.connection.on('error',(err)=>{
 app.use(error())
 app.use(bodyparser())
 routing(app);
-app.listen(3000,()=> {
-    console.log('服务启动在3000端口');
+app.listen(3301,()=> {
+    console.log('服务启动在3301端口');
 });
