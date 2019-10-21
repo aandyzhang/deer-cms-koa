@@ -18,11 +18,14 @@
   },
   "homepage": "https://github.com/zhangboyang123/node",
   "dependencies": {
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.8.1",
+    "koa-body": "^4.1.1",
     "koa-bodyparser": "^4.2.1",
     "koa-json-error": "^3.1.2",
     "koa-parameter": "^3.0.1",
     "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.7.1"
   },

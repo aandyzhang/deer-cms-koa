@@ -14,11 +14,7 @@ class ArticleCtrl {
     }
     async findById(ctx) {
         const article = await Article.findById(ctx.request.body);
-        console.log(article)
         if(!article){
-            // return ctx.throw('404',{
-                
-            // })
             return ctx.body = Object.assign(msg,{data:null})
         }
         ctx.body = Object.assign(msg,{data:article})
