@@ -10,15 +10,16 @@ const articleSchema = new Schema({
   multiple: { type: Array, required: true },
   picture: { type: String, required: true },
   content: { type: String, required: true },
-  published: {tyep: Boolean, default: false},
+  published: {type: Boolean, default: false},
+  status: {type: Boolean,default: true,select:false},
   create_time: {
-    type: String,
-    default: () => moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
+    type: Date,
+    default: Date.now
   },
   update_time: {
-    type: String,
-    default: () => moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
+    type: Date,
+    default: Date.now
   }
-});
+},{timestamps:{createdAt: "create_time",updatedAt: "update_time"}});
 
 module.exports = model("Article", articleSchema);

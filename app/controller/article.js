@@ -1,18 +1,51 @@
 const Article = require('../models/article.js')
 class ArticleCtrl {
     async getList(ctx){
-        const data = await Article.find();
+        const data = await Article.find({status: true});
         if(!data) {
-            return ctx.body = Object.assign(msg,{data:null})
+            ctx.body = {
+                errcode: 0,
+                errmsg: "处理成功",
+                data: null
+            }
         }
-        ctx.body = Object.assign(msg,{data})
+        ctx.body = {
+            errcode: 0,
+            errmsg: "处理成功",
+            data: data
+        }
+    }
+    async deleteArticle(ctx) {
+        const { _id } = ctx.request.body;
+        const res = await Article.updateOne({"_id": _id},{status: false});
+        console.log(res)
+        if(!res) {
+            ctx.body = {
+                errcode: 1,
+                errmsg: "删除失败",
+                data: null
+            }
+        }
+        ctx.body = {
+            errcode: 0,
+            errmsg: "处理成功",
+            data: null
+        }
     }
     async findById(ctx) {
         const article = await Article.findById(ctx.request.body);
         if(!article){
-            ctx.body = Object.assign(msg,{data:null})
+            ctx.body = {
+                errcode: 0,
+                errmsg: "处理成功",
+                data: null
+            }
         }
-        ctx.body = Object.assign(msg,{data:article})
+        ctx.body = {
+            errcode: 0,
+            errmsg: "处理成功",
+            data: article
+        }
     }
     async add(ctx) {
         const {title,author,keyword,multiple,picture,content } = ctx.request.body;
