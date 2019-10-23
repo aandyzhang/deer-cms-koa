@@ -1,9 +1,4 @@
 const Article = require('../models/article.js')
-const msg = {
-    errcode: 0,
-    errmsg: 'success'
-}
-
 class ArticleCtrl {
     async getList(ctx){
         const data = await Article.find();
@@ -15,13 +10,32 @@ class ArticleCtrl {
     async findById(ctx) {
         const article = await Article.findById(ctx.request.body);
         if(!article){
-            return ctx.body = Object.assign(msg,{data:null})
+            ctx.body = Object.assign(msg,{data:null})
         }
         ctx.body = Object.assign(msg,{data:article})
     }
     async add(ctx) {
-        const article = await new Article(ctx.request.body).save();
-        ctx.body = article;
+        const {title,author,keyword,multiple,picture,content } = ctx.request.body;
+        const params = {
+            title,
+            author,
+            keyword,
+            multiple,
+            picture,
+            content
+        }
+        const article = await new Article(params).save();
+        if(article) {
+            ctx.body = {
+                errmsg: "success",
+                errcode: 0,
+            };
+        }else{
+            ctx.body = {
+                errmsg: "操作失败",
+                errcode: 1,
+            };
+        }
     }
 }
 

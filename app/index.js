@@ -15,14 +15,14 @@ mongoose.connection.on('error',(err)=>{
     console.log(err)
 })
 app.use(error())
-app.use(koaBody({
-    multipart:true, // 支持文件上传
-    encoding:'gzip',
-    formidable: {
-        uploadDir:path.join(__dirname,'public/uploads/'), // 设置文件上传目录
-        keepExtensions: true,    // 保持文件的后缀
-    }
-}))
+// app.use(koaBody({
+//     multipart:true, // 支持文件上传
+//     encoding:'gzip',
+//     formidable: {
+//         uploadDir:path.join(__dirname,'public/uploads/'), // 设置文件上传目录
+//         keepExtensions: true,    // 保持文件的后缀
+//     }
+// }))
 app.use(koaStatic(path.join(__dirname,'/public')))  //生成完整http地址
 routing(app);
 app.listen(3301,()=> {
