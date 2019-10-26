@@ -8,7 +8,7 @@ const error = require('koa-json-error');
 const app = new Koa();
 const parameter = require('koa-parameter');
 const { url } = require('./config.js');
-mongoose.connect(url,{useNewUrlParser:true},()=>{
+mongoose.connect(url,{useNewUrlParser:true,useUnifiedTopology: true},()=>{
     console.log('连接成功')
 })
 
