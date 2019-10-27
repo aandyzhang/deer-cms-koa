@@ -1,7 +1,9 @@
+const jwt = require('koa-jwt');
 const Router = require('koa-router');
 const router = new Router({prefix: '/articles'});
 const { add,getList,findById, deleteArticle} = require('../controller/article');
-
+const { secret } = require('../config');
+const auth = jwt({ secret });
 // router.get('/list',list);
 router.post('/add',add);
 router.post('/deleteArticle',deleteArticle);

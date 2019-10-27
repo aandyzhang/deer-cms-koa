@@ -1,7 +1,7 @@
 const Router = require('koa-router');
 const router = new Router({prefix: '/users'});
-const { index, create } = require('../controller/user');
+const { index, login } = require('../controller/user');
 
 router.get('/index',index);
-router.post('/create',create);
+router.post('/login',login);
 module.exports = router;

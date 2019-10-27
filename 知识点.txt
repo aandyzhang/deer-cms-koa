@@ -1,3 +1,13 @@
 1、http 中options的作用
     1.1  检测服务器所支持的的请求方法
     1.2  cors中预检测请求
+
+2、中间件编写
+    
+    app.use(async (ctx.next)=>{
+        try{
+            await next()
+        }catch(e){
+            console.log(e)
+        }
+    })
