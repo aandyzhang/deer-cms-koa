@@ -5,8 +5,16 @@ class UserCtrl {
     async index(ctx) {
         ctx.body = await User.find();
     }
-    async find() {
-        ctx.body = await User.find();
+    async find(ctx) {
+        const data = await User.find();
+        if(!data) {
+            ctx.throw('404', '查询失败')
+        }
+        ctx.body = {
+            data,
+            errcode: 0,
+            errmsg: "处理成功"
+        }
     }
     async findById(ctx) {
         const user = await User.findById(ctx.params.id);
@@ -21,32 +29,42 @@ class UserCtrl {
                 type: 'string',
                 required: true
             },
+            email: {
+                type: 'string',
+                required: false
+            },
             password: {
                 type: 'string',
                 required: true
             },
+            repassword:{
+                type: "string",
+                required: true
+            },
+            permission: {
+                type: "string",
+                required: true
+            }
         });
         const user = await User.findOne(ctx.request.body);
         if(user) {
             ctx.throw(401, '用户已注册，请重新输入');
         }
-        const { username, password } = ctx.request.body;
+        const { username, password,email,repassword,permission } = ctx.request.body;
         const saveResult = await new User({
-            username,password
+            username,password,email,repassword,permission
         }).save()
         if(!saveResult) {
             ctx.throw({
-                errmsg: "注册失败",
+                errmsg: "添加失败",
                 errcode: 1,
                 data: null
             })
         }
         ctx.body = {
-            errmsg: "注册成功",
+            errmsg: "添加成功",
             errcode: 0,
-            data: {
-                username
-            }
+            data: null
         }
     }
     async login(ctx) {

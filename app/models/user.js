@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: {type: String,required: true},
     password: {type: String,required: true,select:false},
     repassword: {type: String,required: true,select:false},
-    email: {type: String,required: false,select:false},
+    email: {type: String,required: false},
     permission: {type: String,enum:['super','visitor'],required: true},
     create_time: {
         type: Date,

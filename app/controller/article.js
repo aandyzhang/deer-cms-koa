@@ -8,7 +8,7 @@ class ArticleCtrl {
         const _pageCount = Math.max(pageCount * 1, 1);  //
         const data = await Article.find({
             status: true,
-            name: new RegExp(keyword)
+            // name: new RegExp(keyword)
         }).limit(_pageIndex).skip(_pageCount * _pageIndex);
         if (!data) {
             ctx.body = {
@@ -26,7 +26,7 @@ class ArticleCtrl {
     async deleteArticle(ctx) {
         ctx.verifyParams({
             _id: {
-                type: String,
+                type: 'string',
                 required: true
             }
         })
@@ -69,27 +69,27 @@ class ArticleCtrl {
     async add(ctx) {
         ctx.verifyParams({
             title: {
-                type: String,
+                type: "string",
                 required: true
             },
             author: {
-                type: String,
+                type:  "string",
                 required: true
             },
             keyword: {
-                type: String,
+                type:  "string",
                 required: true
             },
             picture: {
-                type: String,
+                type:  "string",
                 required: true
             },
             content: {
-                type: String,
+                type:  "string",
                 required: true
             },
             multiple: {
-                type: Array,
+                type:  "array",
                 required: true
             },
         })
