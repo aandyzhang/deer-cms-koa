@@ -80,15 +80,24 @@ class UserCtrl {
         });
         const user = await User.findOne(ctx.request.body);
         if (!user) {
-            ctx.throw({
+            return ctx.body = {
                 errmsg: "用户名或密码不正确",
                 errcode: 1,
                 data: null
-            });
+            };
+            // ctx.throw(401,{
+            //     errmsg: "用户名或密码不正确",
+            //     errcode: 1,
+            //     data: null
+            // });
         }
         const {
             _id,
-            name
+            name,
+            email,
+            create_time,
+            update_time,
+            permission
         } = user;
         const token = jsonwebtoken.sign({
             _id,
@@ -100,7 +109,12 @@ class UserCtrl {
             errmsg: "登录成功",
             errcode: 0,
             data: {
-                token
+                token,
+                _id,
+                email,
+                create_time,
+                update_time,
+                permission
             }
             
         };
